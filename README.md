@@ -1,14 +1,12 @@
 # PyLockGen
 
-[![PyPI version](https://badge.fury.io/py/pylockgen.svg)](https://pypi.org/project/pylockgen/)
+![version](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![license](https://img.shields.io/badge/license-MIT-green)
 
-PyLockGen is a secure password generator and strength checker module written in Python.
-
-## Features
-
-- Generate strong random passwords
-- Check strength using entropy
-- Simple and lightweight
+**PyLockGen** is a simple and secure Python module that can:
+-  Generate strong passwords
+-  Calculate entropy of a password
+-  Check password strength
 
 ## Installation
 
@@ -16,20 +14,21 @@ PyLockGen is a secure password generator and strength checker module written in 
 pip install pylockgen
 ```
 
-## Usage 
-
+## Usage
 ```
 import pylockgen
 
-pwd = pylockgen.generate(length=16)
-strength, entropy = pylockgen.strength(pwd)
+# Generate a secure password
+password = pylockgen.generate()
+print("Generated:", password)
 
-print("Password:", pwd)
-print("Strength:", strength)
-print("Entropy:", entropy)
+# Check entropy
+print("Entropy:", pylockgen.entropy(password))
+
+# Get strength 
+print("Strength:", pylockgen.strength(password))
 
 ```
 
 ## License
-
-MIT © 2025 Hadi Raza
+This project is licensed under the MIT License.
