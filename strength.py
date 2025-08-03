@@ -18,12 +18,13 @@ def entrophy(password):
 def strength(password):
     ent = entrophy(password)
     if ent < 28:
-        return "Very Weak", ent
+        return "Very Weak"
     elif ent < 40:
-        return "Weak", ent
+        return "Weak"
     elif ent < 60:
-        return "Moderate", ent
+        return "Moderate"
     elif ent < 80:
-        return "Strong", ent
+        return "Strong"
     else:
-        return "Very Strong", ent
+        return "Very Strong"
+
