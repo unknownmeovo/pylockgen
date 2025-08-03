@@ -1,6 +1,6 @@
 # PyLockGen
 
-![version](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![version](https://img.shields.io/badge/version-1.3.1-blue.svg)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
 **PyLockGen** is a simple and secure Python module that can:
