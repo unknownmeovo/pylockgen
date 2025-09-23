@@ -1,32 +1,39 @@
 import os
-
-def is_breached(password: str, custom_db: str = None, use_default: bool = True) -> bool:
+def is_breached(password: str, user_db: str = None) -> bool:
     """
-    Check if a password is in the breached database.
-
+    Check if the password exists in the default or user-provided breach database.
+    
     Args:
-        password (str): Password to check.
-        custom_db (str, optional): Path to a custom database file (one password per line).
-        use_default (bool, optional): Whether to use the default weak_passwords.txt. Default = True.
-
+        password (str): The password to check.
+        user_db (str): Optional path to a user-provided text file with weak passwords.
     Returns:
-        bool: True if password is found in a database, False otherwise.
+        bool: True if the password is found, False otherwise.
     """
-
-    # Default weak password list file
     default_file = os.path.join(os.path.dirname(__file__), "weak_passwords.txt")
 
-    # Collect all breached passwords
-    breached = set()
-
-    # Load default file if enabled
-    if use_default and os.path.exists(default_file):
+    # Check default database
+    try:
         with open(default_file, "r", encoding="utf-8") as f:
-            breached.update(line.strip() for line in f)
+            if password in {line.strip() for line in f}:
+                return True
+    except FileNotFoundError:
+        pass
 
-    # Load custom database if provided
-    if custom_db and os.path.exists(custom_db):
-        with open(custom_db, "r", encoding="utf-8") as f:
-            breached.update(line.strip() for line in f)
+    # Check user-provided database
+    if user_db:
+        try:
+            with open(user_db, "r", encoding="utf-8") as f:
+                if password in {line.strip() for line in f}:
+                    return True
+        except FileNotFoundError:
+            pass
 
-    return password in breached
+    return False
+
+def check_breach(password: str, user_db: str = None) -> str:
+    return (
+        "❌ Found in breached password list"
+        if is_breached(password, user_db)
+        else "✅ Not found in breached password list"
+    )
+
